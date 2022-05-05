@@ -15,33 +15,41 @@ public class Individual {
 
     public void setGene(byte gene, int index){
         genes[index] = gene;
-        fitness = 0;
     }
     public void setGenes(byte[] genes){
         this.genes = genes;
     }
 
-    /*
     public int calculateFitness(){
-        this.fitness = FitnessCalculator.calculate(this);
+        this.fitness = FitnessCalc.calculate(this);
         return this.fitness;
     }
-     */
 
     public byte[] getGenes(){
         return genes;
     }
-
     public byte getGene(int index){
         return genes[index];
     }
-
     public int getFitness() {
-        return fitness;
+        return calculateFitness();
     }
 
     public String toString(){
         String s_genes = Arrays.toString(getGenes()).replace(",", "").replace("[", "").replace("]", "").replace(" ","");
-        return "{fitness: " + fitness + ", genes: " + s_genes + "}";
+        return "{fitness: " + getFitness() + ", genes: " + s_genes + "}";
+    }
+
+    public String printGrid(){
+        StringBuilder grid = new StringBuilder();
+        int x = (int) Math.sqrt(defaultGeneLength);
+        for(int i=0; i!=x; i++){
+            for(int j=0; j!=x; j++){
+                grid.append(genes[i*x + j]);
+                grid.append("  ");
+            }
+            grid.append("\n");
+        }
+        return grid.toString();
     }
 }

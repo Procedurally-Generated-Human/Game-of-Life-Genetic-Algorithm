@@ -12,12 +12,13 @@ public class Population {
     public void saveIndividual(Individual indiv, int index){
         individuals[index] = indiv;
     }
+    public int size(){
+        return individuals.length;
+    }
 
     public Individual getIndividual(int index){
         return individuals[index];
     }
-
-    /*
     public Individual getFittest(){
         Individual fittest = individuals[0];
         for(int i=0; i!=individuals.length; i++){
@@ -26,11 +27,6 @@ public class Population {
             }
         }
         return fittest;
-    }
-     */
-
-    public int size(){
-        return individuals.length;
     }
 
     public String toString(){

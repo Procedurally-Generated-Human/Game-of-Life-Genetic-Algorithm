@@ -1,32 +1,24 @@
 public class FitnessCalc {
 
-    Individual indiv;
 
-    public Individual getIndiv() {
-        return indiv;
-    }
+    static int x = (int) Math.sqrt(Individual.defaultGeneLength);
 
-    public void setIndiv(Individual indiv) {
-        this.indiv = indiv;
-    }
-
-    public byte[][] onetotwod(byte[] oned){
+    static byte[][] onetotwod(byte[] oned){
         int index = 0;
-        byte[][] twod = new byte[10][10];
-        for(int i=0; i!=10; i++){
-            for(int j=0; j!=10; j++){
+        byte[][] twod = new byte[x][x];
+        for(int i=0; i!=x; i++){
+            for(int j=0; j!=x; j++){
                 twod[i][j] = oned[index];
                 index += 1;
             }
         }
         return twod;
     }
-
-    public byte[] twotooned(byte[][] twod){
+    static byte[] twotooned(byte[][] twod){
         int index = 0;
-        byte[] oned = new byte[100];
-        for(int i=0; i!=10; i++){
-            for(int j=0; j!=10; j++){
+        byte[] oned = new byte[x*x];
+        for(int i=0; i!=x; i++){
+            for(int j=0; j!=x; j++){
                 oned[index] = twod[i][j];
                 index += 1;
             }
@@ -34,23 +26,21 @@ public class FitnessCalc {
         return oned;
     }
 
-    public void evolve(){
+    static void evolve(Individual indiv){
         byte[][] genes = onetotwod(indiv.getGenes());
 
-        int x = 10;
-        int y = 10;
 
-        byte[][] future = new byte[x][y];
+        byte[][] future = new byte[x][x];
         // Loop through every cell
         for (int l = 0; l != x; l++)
         {
-            for (int m = 0; m != y; m++)
+            for (int m = 0; m != x; m++)
             {
                 // finding no Of Neighbours that are alive
                 int aliveNeighbours = 0;
                 for (int i = -1; i <= 1; i++)
                     for (int j = -1; j <= 1; j++)
-                        if ((l+i>=0 && l+i<x) && (m+j>=0 && m+j<y))
+                        if ((l+i>=0 && l+i<x) && (m+j>=0 && m+j<x))
                             aliveNeighbours += genes[l + i][m + j];
 
                 // The cell needs to be subtracted from
@@ -81,12 +71,14 @@ public class FitnessCalc {
 
     }
 
-    public int calculate(){
+    static int calculate(Individual ind){
+        Individual indiv = new Individual();
+        indiv.setGenes(ind.getGenes());
         for(int i=0; i!=100; i++){
-            evolve();
+            evolve(indiv);
         }
         int grade = 0;
-        for(int i=0; i!=100; i++){
+        for(int i=0; i!=Individual.defaultGeneLength; i++){
             if(indiv.getGene(i) == 1){
                 grade += 1;
             }
