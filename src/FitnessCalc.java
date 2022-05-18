@@ -14,6 +14,19 @@ public class FitnessCalc {
         }
         return twod;
     }
+
+    static byte[][] oney(byte[] oned){
+        int index = 0;
+        byte[][] twod = new byte[x-10][x-10];
+        for(int i=0; i!=x-10; i++){
+            for(int j=0; j!=x-10; j++){
+                twod[i][j] = oned[index];
+                index += 1;
+            }
+        }
+        return twod;
+    }
+
     static byte[] twotooned(byte[][] twod){
         int index = 0;
         byte[] oned = new byte[x*x];
@@ -78,9 +91,26 @@ public class FitnessCalc {
             evolve(indiv);
         }
         int grade = 0;
+        /*
         for(int i=0; i!=Individual.defaultGeneLength; i++){
             if(indiv.getGene(i) == 1){
                 grade += 1;
+            }
+        }
+         */
+        byte[][] genes_2d = onetotwod(indiv.getGenes());
+        for(int i=0; i!=x/2; i++){
+            for(int j=0; j!=x; j++){
+                if(genes_2d[i][j] == 1){
+                    grade +=1;
+                }
+            }
+        }
+        for(int i=x/2; i!=x; i++){
+            for(int j=0; j!=x; j++){
+                if(genes_2d[i][j] == 1){
+                    grade -=1;
+                }
             }
         }
         return grade;

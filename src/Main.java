@@ -4,13 +4,12 @@ public class Main {
 
     public static void main(String[] args){
         Population pop = new Population(100);
-        //System.out.println(pop);
-        //System.out.println("**************");
-        System.out.println(pop.getFittest());
-        //System.out.println(pop.getFittest().printGrid());
         for(int i=0; i!=100; i++){
-            pop = Algorithm.evolvePopulation(pop);
             System.out.println(pop.getFittest());
+            pop = Algorithm.evolvePopulation(pop);
         }
+
+
     }
+
 }

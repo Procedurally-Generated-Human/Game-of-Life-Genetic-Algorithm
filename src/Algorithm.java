@@ -1,8 +1,8 @@
 public class Algorithm {
 
     private static final double uniformRate = 0.5;
-    private static final double mutationRate = 0.0100;
-    private static final int tournamentSize = 7;
+    private static final double mutationRate = 0.0150;
+    private static final int tournamentSize = 10;
     private static final boolean elitism = true;
 
     public static Population evolvePopulation(Population pop){
@@ -35,11 +35,22 @@ public class Algorithm {
     }
 
     private static void mutate(Individual indiv){
+        /*
         for (int i = 0; i < indiv.getGenes().length; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
                 byte gene = (byte) Math.round(Math.random());
                 indiv.setGene(gene, i);
+            }
+        }
+         */
+        byte[][] genes_2d = FitnessCalc.onetotwod(indiv.getGenes());
+        for(int i = Individual.paddingSize; i!= Individual.paddingSize + 10; i++){
+            for(int j = Individual.paddingSize; j!=Math.sqrt(Individual.defaultGeneLength)- Individual.paddingSize; j++){
+                if (Math.random() <= mutationRate) {
+                    byte gene = (byte) Math.round(Math.random());
+                    indiv.setGene(gene, (i*Individual.x)+j);
+                }
             }
         }
     }
