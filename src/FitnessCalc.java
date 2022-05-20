@@ -87,32 +87,23 @@ public class FitnessCalc {
     static int calculate(Individual ind){
         Individual indiv = new Individual();
         indiv.setGenes(ind.getGenes());
-        for(int i=0; i!=100; i++){
+        int grade = 0;
+
+        for(int i=0; i!=500; i++){
             evolve(indiv);
         }
-        int grade = 0;
-        /*
-        for(int i=0; i!=Individual.defaultGeneLength; i++){
-            if(indiv.getGene(i) == 1){
-                grade += 1;
-            }
-        }
-         */
+
         byte[][] genes_2d = onetotwod(indiv.getGenes());
-        for(int i=0; i!=x/2; i++){
-            for(int j=0; j!=x; j++){
+        for(int i=0; i!=10; i++){
+            for(int j=0; j!=20; j++){
                 if(genes_2d[i][j] == 1){
-                    grade +=1;
+                    grade += 1;
                 }
             }
         }
-        for(int i=x/2; i!=x; i++){
-            for(int j=0; j!=x; j++){
-                if(genes_2d[i][j] == 1){
-                    grade -=1;
-                }
-            }
-        }
+
+
+
         return grade;
     }
 }

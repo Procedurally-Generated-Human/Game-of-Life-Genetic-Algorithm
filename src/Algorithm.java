@@ -1,8 +1,8 @@
 public class Algorithm {
 
-    private static final double uniformRate = 0.5;
-    private static final double mutationRate = 0.0150;
-    private static final int tournamentSize = 10;
+    private static final double uniformRate = 0.999;
+    private static  double mutationRate = 0.17;
+    private static final int tournamentSize = 7;
     private static final boolean elitism = true;
 
     public static Population evolvePopulation(Population pop){

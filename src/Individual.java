@@ -7,7 +7,6 @@ public class Individual {
     static final int x = (int) Math.sqrt(defaultGeneLength);
     private byte[] genes = new byte[defaultGeneLength];
     static final int paddingSize = 5;
-    private int fitness = 0;
 
     public Individual(){
         for(int i=0; i!=realGeneLength; i++){
@@ -40,8 +39,7 @@ public class Individual {
     }
 
     public int calculateFitness(){
-        this.fitness = FitnessCalc.calculate(this);
-        return this.fitness;
+        return FitnessCalc.calculate(this);
     }
 
     public byte[] getGenes(){
